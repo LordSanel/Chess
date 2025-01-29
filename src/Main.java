@@ -15,12 +15,14 @@ public class Main {
        }
 
         Board chessBoard = new Board();
+        chessBoard.setIconImage(new ImageIcon("./resources/babana.png").getImage());
         JPanel boardPanel =  new JPanel(new GridLayout(8,8));
         chessBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         chessBoard.setSize(500,500);
         chessBoard.setLocationRelativeTo(null);
         chessBoard.boardInit(boardPanel);
         chessBoard.setVisible(true);
+        chessBoard.game();
 
     }
 }

@@ -29,23 +29,32 @@ public class Board extends JFrame {
 
     public void boardInit(JPanel panel){
         this.add(panel);
-        for(int x = 0; x < 8; x++ ){
-            boolean whiteFirst = (x % 2 == 0);
-            for(int y = 0; y < 8 ; y++){
+        for(int y = 0; y < 8; y++ ){
+            boolean whiteFirst = (y % 2 == 0);
+            for(int x = 0; x < 8 ; x++){
                  if(whiteFirst){
-                     boardTiles[x][y] = new BoardTile(Color.WHITE);
-                     boardTiles[x][y].setText(+x +" " +y);
-                     panel.add(boardTiles[x][y]);
+                     boardTiles[y][x] = new BoardTile(Color.WHITE);
+                     boardTiles[y][x].setText(+y +" " +x);
+                     panel.add(boardTiles[y][x]);
                      whiteFirst = false;
                  }
                  else{
-                     boardTiles[x][y] = new BoardTile(Color.BLACK);
-                     boardTiles[x][y].setText(+x +" " +y);
-                     panel.add(boardTiles[x][y]);
+                     boardTiles[y][x] = new BoardTile(Color.BLACK);
+                     boardTiles[y][x].setText(+y +" " +x);
+                     panel.add(boardTiles[y][x]);
                      whiteFirst = true;
                  }
             }
         }
+    }
+
+    public void game(){
+        boolean gameContinue = false;
+        String winner =  null;
+        while(gameContinue){
+
+        }
+        System.out.println("The Winner is: ");
     }
 
 }
