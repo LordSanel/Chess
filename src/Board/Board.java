@@ -30,17 +30,19 @@ public class Board extends JFrame {
     public void boardInit(JPanel panel){
         this.add(panel);
         for(int x = 0; x < 8; x++ ){
-            boolean blackFirst = (x % 2 == 0);
+            boolean whiteFirst = (x % 2 == 0);
             for(int y = 0; y < 8 ; y++){
-                 if(blackFirst){
-                     boardTiles[x][y] = new BoardTile(Color.BLACK);
+                 if(whiteFirst){
+                     boardTiles[x][y] = new BoardTile(Color.WHITE);
+                     boardTiles[x][y].setText(+x +" " +y);
                      panel.add(boardTiles[x][y]);
-                     blackFirst = false;
+                     whiteFirst = false;
                  }
                  else{
-                     boardTiles[x][y] = new BoardTile(Color.WHITE);
+                     boardTiles[x][y] = new BoardTile(Color.BLACK);
+                     boardTiles[x][y].setText(+x +" " +y);
                      panel.add(boardTiles[x][y]);
-                     blackFirst = true;
+                     whiteFirst = true;
                  }
             }
         }

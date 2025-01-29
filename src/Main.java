@@ -15,11 +15,11 @@ public class Main {
        }
 
         Board chessBoard = new Board();
-        JPanel mainPanel = new JPanel(new GridLayout());
+        JPanel boardPanel =  new JPanel(new GridLayout(8,8));
         chessBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         chessBoard.setSize(500,500);
         chessBoard.setLocationRelativeTo(null);
-        chessBoard.boardInit(mainPanel);
+        chessBoard.boardInit(boardPanel);
         chessBoard.setVisible(true);
 
     }
