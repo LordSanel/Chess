@@ -2,19 +2,19 @@ package Board.Pieces;
 
 
 import Board.BoardTile;
-import Board.TeamColor;
 
 import javax.swing.*;
+import java.awt.*;
 
 abstract public class ChessPiece {
-    private TeamColor team;
+    private Color team;
     private ImageIcon icon;
     private BoardTile currentTile;
 
-    public TeamColor getTeam(){
-        return team;
+    public Color getTeam(){
+        return this.team;
     }
-    public void setTeam(TeamColor team){
+    public void setTeam(Color team) {
         this.team = team;
     }
     public ImageIcon getIcon() {
