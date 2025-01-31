@@ -2,44 +2,43 @@ package Board;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Board extends JFrame {
 
-    private boolean whiteTurn;
-    private BoardTile firstClick;
-    private BoardTile secondClick;
     private BoardTile[][] boardTiles;
-
-    public boolean isWhiteTurn() {
-        return whiteTurn;
-    }
-    public void swapTurn(){
-        whiteTurn = !whiteTurn;
-    }
+    private GameActionListener listener;
+    private JPanel panel;
 
     public Board(){
         super("Chess");
-        this.whiteTurn = true;
+
         this.boardTiles = new BoardTile[8][8];
+        this.listener = new GameActionListener();
+        this.panel = new JPanel(new GridLayout(8,8));
+        this.add(this.panel);
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(new ImageIcon("resources/babana.png").getImage());
+        this.setSize(500,500);
+        this.setLocationRelativeTo(null);
+        this.boardInit();
+        this.setVisible(true);
     }
 
-
-    public void boardInit(JPanel panel){
-        this.add(panel);
+    public void boardInit(){
         for(int y = 0; y < 8; y++ ){
             boolean whiteFirst = (y % 2 == 0);
             for(int x = 0; x < 8 ; x++){
                  if(whiteFirst){
-                     boardTiles[y][x] = new BoardTile(Color.WHITE);
+                     boardTiles[y][x] = new BoardTile(Color.WHITE, this);
+                     boardTiles[y][x].addActionListener(this.listener);
                      boardTiles[y][x].setText(+y +" " +x);
                      panel.add(boardTiles[y][x]);
                      whiteFirst = false;
                  }
                  else{
-                     boardTiles[y][x] = new BoardTile(Color.BLACK);
+                     boardTiles[y][x] = new BoardTile(Color.BLACK, this);
+                     boardTiles[y][x].addActionListener(this.listener);
                      boardTiles[y][x].setText(+y +" " +x);
                      panel.add(boardTiles[y][x]);
                      whiteFirst = true;
@@ -48,13 +47,5 @@ public class Board extends JFrame {
         }
     }
 
-    public void game(){
-        boolean gameContinue = false;
-        String winner =  null;
-        while(gameContinue){
-
-        }
-        System.out.println("The Winner is: ");
-    }
-
 }
+

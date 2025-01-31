@@ -30,12 +30,14 @@ abstract public class ChessPiece {
         currentTile = newTile;
     }
 
-    public void move(BoardTile moveTo){
+    public boolean move(BoardTile moveTo){
         if(checkRule(moveTo)){
             moveTo.attachPiece(this);
             currentTile.removePiece(this);
             setCurrentTile(moveTo);
+            return true;
         }
+        return false;
     }
     public abstract boolean checkRule(BoardTile moveTo);
 
