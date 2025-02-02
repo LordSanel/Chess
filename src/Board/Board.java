@@ -1,13 +1,17 @@
 package Board;
 
+import Board.Pieces.ChessPiece;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board extends JFrame {
 
     private final BoardTile[][] boardTiles = new BoardTile[8][8];
     private final GameActionListener listener = new GameActionListener();
     private final JPanel panel = new JPanel(new GridLayout(8,8));
+    private final ArrayList<ChessPiece> chessPieces = new ArrayList<>(32);
 
     public Board(){
         super("Chess");
@@ -27,14 +31,14 @@ public class Board extends JFrame {
             boolean whiteFirst = (y % 2 == 0);
             for(int x = 0; x < 8 ; x++){
                  if(whiteFirst){
-                     boardTiles[y][x] = new BoardTile(Color.WHITE, this);
+                     boardTiles[y][x] = new BoardTile(Color.WHITE, this, x, y);
                      boardTiles[y][x].addActionListener(this.listener);
                      boardTiles[y][x].setText(+y +" " +x);
                      panel.add(boardTiles[y][x]);
                      whiteFirst = false;
                  }
                  else{
-                     boardTiles[y][x] = new BoardTile(Color.BLACK, this);
+                     boardTiles[y][x] = new BoardTile(Color.BLACK, this, x, y);
                      boardTiles[y][x].addActionListener(this.listener);
                      boardTiles[y][x].setText(+y +" " +x);
                      panel.add(boardTiles[y][x]);
@@ -43,6 +47,7 @@ public class Board extends JFrame {
             }
         }
     }
+    public void highlightTiles(){}
 
 }
 

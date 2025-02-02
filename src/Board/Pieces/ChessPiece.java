@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 abstract public class ChessPiece {
     private Color team;
-    private String icon;
+    private PieceTypes type;
     private BoardTile currentTile;
     private List<BoardTile> possibleMoves;
 
@@ -20,11 +20,8 @@ abstract public class ChessPiece {
     public void setTeam(Color team) {
         this.team = team;
     }
-    public String getIcon(){
-        return this.icon;
-    }
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public PieceTypes getType(){
+        return this.type;
     }
     public BoardTile getCurrentTile(){
         return currentTile;
