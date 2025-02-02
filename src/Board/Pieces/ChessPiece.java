@@ -5,11 +5,14 @@ import Board.BoardTile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 abstract public class ChessPiece {
     private Color team;
-    private ImageIcon icon;
+    private String icon;
     private BoardTile currentTile;
+    private List<BoardTile> possibleMoves;
 
     public Color getTeam(){
         return this.team;
@@ -17,10 +20,10 @@ abstract public class ChessPiece {
     public void setTeam(Color team) {
         this.team = team;
     }
-    public ImageIcon getIcon() {
-        return icon;
+    public String getIcon(){
+        return this.icon;
     }
-    public void setIcon(ImageIcon icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
     public BoardTile getCurrentTile(){
@@ -31,15 +34,17 @@ abstract public class ChessPiece {
     }
 
     public boolean move(BoardTile moveTo){
-        if(checkRule(moveTo)){
+        if(getPossibleMoves().contains(moveTo)){
             moveTo.attachPiece(this);
             currentTile.removePiece(this);
             setCurrentTile(moveTo);
+            generatePossibleMoves();
             return true;
         }
         return false;
     }
-    public abstract boolean checkRule(BoardTile moveTo);
-
-
+    public abstract void generatePossibleMoves();
+    public List<BoardTile> getPossibleMoves(){
+        return this.possibleMoves;
+    }
 }

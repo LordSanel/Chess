@@ -5,16 +5,13 @@ import java.awt.*;
 
 public class Board extends JFrame {
 
-    private BoardTile[][] boardTiles;
-    private GameActionListener listener;
-    private JPanel panel;
+    private final BoardTile[][] boardTiles = new BoardTile[8][8];
+    private final GameActionListener listener = new GameActionListener();
+    private final JPanel panel = new JPanel(new GridLayout(8,8));
 
     public Board(){
         super("Chess");
 
-        this.boardTiles = new BoardTile[8][8];
-        this.listener = new GameActionListener();
-        this.panel = new JPanel(new GridLayout(8,8));
         this.add(this.panel);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

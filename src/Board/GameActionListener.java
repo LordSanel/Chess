@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class GameActionListener implements ActionListener {
 
-    private BoardTile firstClick;
+    private BoardTile selected;
     private Color turn;
 
     public GameActionListener(){
@@ -16,18 +16,22 @@ public class GameActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
           BoardTile clicked = (BoardTile) e.getSource();
 
-          if(firstClick == null) {
-              if((clicked.getCurrentPiece() != null) && clicked.getCurrentPiece().getTeam() == whoseTurn()){
-                  firstClick = clicked;
-              }
+          if(selected == null) {
+              if(clicked.getCurrentPiece() == null)
+                  return;
+              if(clicked.getCurrentPiece().getTeam() != whoseTurn())
+                  return;
+
+
+              selected = clicked;
           }
           else {
-              if(firstClick == clicked){
-                  firstClick = null;
+              if(selected == clicked){
+                  selected = null;
               }
               else{
-                  if(firstClick.getCurrentPiece().move(clicked)){
-                      firstClick = null;
+                  if(selected.getCurrentPiece().move(clicked)){
+                      selected = null;
                       swapTurn();
                   }
               }

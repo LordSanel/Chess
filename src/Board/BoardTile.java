@@ -18,14 +18,6 @@ public class BoardTile extends JButton {
         this.setBackground(color);
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
     public void setCurrentPiece(ChessPiece currentPiece) {
         this.currentPiece = currentPiece;
     }
@@ -36,11 +28,11 @@ public class BoardTile extends JButton {
 
     public void attachPiece(ChessPiece piece){
           setCurrentPiece(piece);
-          setIcon(getCurrentPiece().getIcon());
+          setText(piece.getIcon());
     }
     public void removePiece(ChessPiece piece){
           setCurrentPiece(null);
-          setIcon(null);
+          setText("");
     }
 
 }
