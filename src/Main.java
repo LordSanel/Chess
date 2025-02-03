@@ -13,7 +13,6 @@ public class Main {
        } catch(Exception ex){
             ex.printStackTrace();
        }
-
        */
 
         Board chessBoard = new Board();

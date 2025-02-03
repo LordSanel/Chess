@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public class Board extends JFrame {
 
     private final BoardTile[][] boardTiles = new BoardTile[8][8];
-    private final GameActionListener listener = new GameActionListener();
+    private final GameActionListener listener = new GameActionListener(this);
     private final JPanel panel = new JPanel(new GridLayout(8,8));
     private final ArrayList<ChessPiece> chessPieces = new ArrayList<>(32);
+    private BoardTile selected;
+    private Color turn;
 
     public Board(){
         super("Chess");
@@ -46,8 +48,55 @@ public class Board extends JFrame {
                  }
             }
         }
+        pieceInit();
     }
-    public void highlightTiles(){}
+    public void pieceInit(){
+
+    }
+    public void gameTurn(BoardTile clicked){
+        if(selected == null) {
+            if(clicked.getCurrentPiece() == null)
+                return;
+            if(clicked.getCurrentPiece().getTeam() != whoseTurn())
+                return;
+
+            selected = clicked;
+            highlightTiles(selected.getCurrentPiece());
+        }
+        else {
+            if(selected == clicked){
+                dehighlightTiles(selected.getCurrentPiece());
+                selected = null;
+            }
+            else{
+                if(selected.getCurrentPiece().move(clicked)){
+                    dehighlightTiles(selected.getCurrentPiece());
+                    selected = null;
+                    swapTurn();
+                }
+            }
+        }
+    }
+    public boolean checkMateCond(){
+        return true;
+    }
+    public void highlightTiles(ChessPiece piece){
+        piece.getPossibleMoves().forEach(x -> x.setBackground(Color.GREEN));
+    }
+    public void dehighlightTiles(ChessPiece piece){
+        piece.getPossibleMoves().forEach(x -> x.resetColor());
+    }
+    public Color whoseTurn(){
+        return turn;
+    }
+    public void swapTurn(){
+        if(whoseTurn() == Color.WHITE){
+            turn = Color.BLACK;
+        }
+        else{
+            turn = Color.WHITE;
+        }
+    }
 
 }
 

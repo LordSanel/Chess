@@ -4,22 +4,20 @@ import Board.Pieces.ChessPiece;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BoardTile extends JButton {
     private Board board;
     private ChessPiece currentPiece;
     private Color color;
-    private int x;
-    private int y;
+    private int xPos;
+    private int yPos;
 
-    public BoardTile(Color color, Board board,int x, int y){
+    public BoardTile(Color color, Board board, int xPos, int yPos){
         super();
         this.board = board;
         this.currentPiece = null;
-        this.x = x;
-        this.y= y;
+        this.xPos = xPos;
+        this.yPos= yPos;
         this.color = color;
         this.setBackground(color);
         this.setFont(new Font("Serif",Font.PLAIN, 35));
@@ -32,16 +30,16 @@ public class BoardTile extends JButton {
     public ChessPiece getCurrentPiece() {
         return currentPiece;
     }
-    public int getX(){
-        return x;
+    public int getXPos(){
+        return xPos;
     }
-    public int getY(){
-        return y;
+    public int getYPos(){
+        return yPos;
     }
 
     public void attachPiece(ChessPiece piece){
           if(currentPiece!= null){
-
+             //Remove from pieces list in Board
           }
           setCurrentPiece(piece);
           setText(piece.getType().getIcon());
@@ -49,6 +47,9 @@ public class BoardTile extends JButton {
     public void removePiece(ChessPiece piece){
           setCurrentPiece(null);
           setText("");
+    }
+    public void resetColor(){
+        this.setBackground(color);
     }
 
 }
