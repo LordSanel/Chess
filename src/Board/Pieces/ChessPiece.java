@@ -33,9 +33,9 @@ abstract public class ChessPiece {
     public boolean move(BoardTile moveTo){
         if(getPossibleMoves().contains(moveTo)){
             moveTo.attachPiece(this);
-            currentTile.removePiece(this);
+            currentTile.detachPiece(this);
             setCurrentTile(moveTo);
-            generatePossibleMoves();
+            //generatePossibleMoves();
             return true;
         }
         return false;

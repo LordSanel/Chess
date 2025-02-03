@@ -13,7 +13,10 @@ public class Board extends JFrame {
     private final JPanel panel = new JPanel(new GridLayout(8,8));
     private final ArrayList<ChessPiece> chessPieces = new ArrayList<>(32);
     private BoardTile selected;
-    private Color turn;
+    private Color turn = Color.WHITE;
+    private boolean gameOver = false;
+    //Implement Adjacency Lists for possible Moves to check checkMateCond
+
 
     public Board(){
         super("Chess");
@@ -71,14 +74,23 @@ public class Board extends JFrame {
             else{
                 if(selected.getCurrentPiece().move(clicked)){
                     dehighlightTiles(selected.getCurrentPiece());
+                    chessPieces.forEach(ChessPiece::generatePossibleMoves);
                     selected = null;
+                    if(checkMateCond()) {
+                        gameOver = true;
+                        listener.setWinner(whoseTurn());
+                        listener.actionPerformed(null); //Kinda sketchy but who gives a fuck
+                    }
                     swapTurn();
                 }
             }
         }
     }
     public boolean checkMateCond(){
-        return true;
+        return false;
+    }
+    public void removePiece(ChessPiece piece){
+        chessPieces.remove(piece);
     }
     public void highlightTiles(ChessPiece piece){
         piece.getPossibleMoves().forEach(x -> x.setBackground(Color.GREEN));
@@ -97,6 +109,11 @@ public class Board extends JFrame {
             turn = Color.WHITE;
         }
     }
+    public boolean isGameOver(){
+        return gameOver;
+    }
+    public void combinePossibleMoves(){
 
+    }
 }
 

@@ -20,6 +20,8 @@ public class BoardTile extends JButton {
         this.yPos= yPos;
         this.color = color;
         this.setBackground(color);
+        this.setBorderPainted(false);
+        this.setFocusPainted(false);
         this.setFont(new Font("Serif",Font.PLAIN, 35));
     }
 
@@ -39,12 +41,12 @@ public class BoardTile extends JButton {
 
     public void attachPiece(ChessPiece piece){
           if(currentPiece!= null){
-             //Remove from pieces list in Board
+              board.removePiece(currentPiece);
           }
           setCurrentPiece(piece);
           setText(piece.getType().getIcon());
     }
-    public void removePiece(ChessPiece piece){
+    public void detachPiece(ChessPiece piece){
           setCurrentPiece(null);
           setText("");
     }
